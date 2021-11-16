@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import './signup.dart';
+import './login.dart';
 
 class Welcome extends StatelessWidget {
   @override
@@ -51,6 +54,52 @@ class Welcome extends StatelessWidget {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 textAlign: TextAlign.center,
               ))),
+          Container(
+              margin: EdgeInsets.all(5),
+              width: 200,
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red))),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.pink[800]!),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUp()),
+                  );
+                },
+                child: Text('Sign Up'),
+              )),
+          Container(
+            margin: EdgeInsets.all(5),
+            child: RichText(
+              text: TextSpan(
+                text: 'Already Have An Account? ',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+                children: [
+                  TextSpan(
+                      text: 'Log In',
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            ),
+                      style: TextStyle(
+                          color: Colors.black,
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.normal)),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
