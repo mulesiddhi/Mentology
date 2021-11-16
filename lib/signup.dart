@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import './home.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new _SignUpState();
+}
+
+class _SignUpData {
+  String name = '';
+  String email = '';
+  String password = '';
+}
+
+class _SignUpState extends State<SignUp> {
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.pink[50],
-        body: Column(children: [
+        body: ListView(children: [
           Container(
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.only(left: 50, top: 50, right: 50, bottom: 20),
@@ -37,6 +51,79 @@ class SignUp extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.pink[600],
                       )))),
+          Container(
+              padding: new EdgeInsets.all(20.0),
+              child: new Form(
+                key: this._formKey,
+                child: new ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    // We will add fields here.
+                    new TextFormField(
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        keyboardType: TextInputType
+                            .emailAddress, // Use email input type for emails.
+                        decoration: new InputDecoration(
+                            hintText: 'you@example.com',
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            labelText: 'E-mail Address',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ))),
+                    new TextFormField(
+                        keyboardType: TextInputType.name,
+                        decoration: new InputDecoration(
+                            hintText: 'XYZ',
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            labelText: 'Name',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ))),
+                    new TextFormField(
+                        obscureText: true, // Use secure text for passwords.
+                        decoration: new InputDecoration(
+                            hintText: 'Password',
+                            labelText: 'Enter your password',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ))),
+                    new Container(
+                      // width: screenSize.width,
+                      child: new ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.red))),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.pink[800]!),
+                        ),
+                        child: new Text(
+                          'Sign Up',
+                          style: new TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                        ),
+                      ),
+                      margin: new EdgeInsets.only(top: 40.0),
+                    )
+                  ],
+                ),
+              ))
         ]));
   }
 }
