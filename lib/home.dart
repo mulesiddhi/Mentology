@@ -104,6 +104,85 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      margin: EdgeInsets.all(5),
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.red))),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.pink[800]!),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
+                        child: Text("     Let's Go     "),
+                      )),
+                  Container(
+                    // margin:
+                    //     EdgeInsets.only(left: 00, top: 0, right: 0, bottom: 0),
+                    child: Image.asset('assets/images/tree.png'),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 00, top: 30, right: 0, bottom: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: EdgeInsets.all(5),
+                      child: Center(
+                          child: Text("Match with your Wellness Specialist",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              )))),
+                  Container(
+                      margin: EdgeInsets.all(0),
+                      // height: 50,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.red))),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.pink[800]!),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
+                        child: Text("     Get Started Now     "),
+                      )),
+                ],
+              ),
+            ),
+            Container(
+              // padding: EdgeInsets.all(10),
+              // margin: EdgeInsets.all(5),
+              child: Center(child: Image.asset('assets/images/therapy.png')),
+            ),
           ],
         ));
   }
