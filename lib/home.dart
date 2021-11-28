@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './signup.dart';
+import './therapy.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -71,7 +72,7 @@ class Home extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
+                            MaterialPageRoute(builder: (context) => Therapy()),
                           );
                         },
                         child: Text('    Continue    '),
@@ -125,7 +126,7 @@ class Home extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
+                            MaterialPageRoute(builder: (context) => Therapy()),
                           );
                         },
                         child: Text("     Let's Go     "),
@@ -170,7 +171,7 @@ class Home extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
+                            MaterialPageRoute(builder: (context) => Therapy()),
                           );
                         },
                         child: Text("     Get Started Now     "),
