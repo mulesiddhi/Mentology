@@ -7,15 +7,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.pink[50],
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
                 padding: EdgeInsets.all(10),
                 margin:
                     EdgeInsets.only(left: 10, top: 40, right: 0, bottom: 00),
                 child: Text("Welcome,",
-                    textAlign: TextAlign.center,
+                    // textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -181,7 +181,7 @@ class Home extends StatelessWidget {
             ),
             Container(
               // padding: EdgeInsets.all(10),
-              // margin: EdgeInsets.all(5),
+              margin: EdgeInsets.only(left: 00, top: 0, right: 0, bottom: 20),
               child: Center(child: Image.asset('assets/images/therapy.png')),
             ),
           ],
