@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "24312335156",
+    "project_id": "mentology-7d357",
+    "storage_bucket": "mentology-7d357.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24312335156:android:5b95937cf7cdc74957b361",
+        "android_client_info": {
+          "package_name": "com.mentology.flutter_basic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24312335156-lq35r9ec36g2u2cpklif4fb63sjrvtdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCFTZ202810Ci_dW6DvGBXkGAlX6w6ZhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24312335156-lq35r9ec36g2u2cpklif4fb63sjrvtdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

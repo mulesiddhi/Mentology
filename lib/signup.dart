@@ -6,17 +6,117 @@ class SignUp extends StatefulWidget {
   State<StatefulWidget> createState() => new _SignUpState();
 }
 
-class _SignUpData {
-  String name = '';
-  String email = '';
-  String password = '';
-}
-
 class _SignUpState extends State<SignUp> {
-  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  //form  key
+  final _formKey = GlobalKey<FormState>();
+  //editting controller
+  final _nameController = new TextEditingController();
+  final _emailController = new TextEditingController();
+  final _passwordController = new TextEditingController();
+  final _confirmPasswordController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    //name field
+    final namefield = TextFormField(
+      controller: _nameController,
+      keyboardType: TextInputType.name,
+      autofocus: false,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      onSaved: (String? value) {
+        _nameController.text = value!;
+      },
+      decoration: new InputDecoration(
+          prefixIcon: Icon(Icons.person),
+          hintText: 'XYZ',
+          hintStyle: TextStyle(
+            color: Colors.black,
+          ),
+          labelText: 'Your Name',
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          )),
+      textInputAction: TextInputAction.next,
+    );
+
+    //email field
+    final emailfield = TextFormField(
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+      autofocus: false,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      onSaved: (String? value) {
+        _emailController.text = value!;
+      },
+      decoration: new InputDecoration(
+          prefixIcon: Icon(Icons.email),
+          hintText: 'you@example.com',
+          hintStyle: TextStyle(
+            color: Colors.black,
+          ),
+          labelText: 'E-mail Address',
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          )),
+      textInputAction: TextInputAction.next,
+    );
+
+    final passwordfield = TextFormField(
+        controller: _passwordController,
+        autofocus: false,
+        obscureText: true,
+        onSaved: (String? value) {
+          _passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: new InputDecoration(
+            hintText: 'Password',
+            prefixIcon: Icon(Icons.vpn_key),
+            labelText: 'Enter your password',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            )));
+
+    final confirmpasswordfield = TextFormField(
+        controller: _confirmPasswordController,
+        autofocus: false,
+        obscureText: true,
+        onSaved: (String? value) {
+          _passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: new InputDecoration(
+            hintText: 'Password',
+            prefixIcon: Icon(Icons.vpn_key),
+            labelText: 'Confirm password',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            )));
+
+    final signupButton = Material(
+      color: Colors.pink[800],
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(18.0),
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () => {},
+        child: Text(
+          "SignUp",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
     return Scaffold(
         backgroundColor: Colors.pink[50],
         body: ListView(children: [
@@ -59,68 +159,16 @@ class _SignUpState extends State<SignUp> {
                   shrinkWrap: true,
                   children: <Widget>[
                     // We will add fields here.
-                    new TextFormField(
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                        keyboardType: TextInputType
-                            .emailAddress, // Use email input type for emails.
-                        decoration: new InputDecoration(
-                            hintText: 'you@example.com',
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            labelText: 'E-mail Address',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ))),
-                    new TextFormField(
-                        keyboardType: TextInputType.name,
-                        decoration: new InputDecoration(
-                            hintText: 'XYZ',
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            labelText: 'Name',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ))),
-                    new TextFormField(
-                        obscureText: true, // Use secure text for passwords.
-                        decoration: new InputDecoration(
-                            hintText: 'Password',
-                            labelText: 'Enter your password',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ))),
-                    new Container(
-                      // width: screenSize.width,
-                      child: new ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.red))),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.pink[800]!),
-                        ),
-                        child: new Text(
-                          'Sign Up',
-                          style: new TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Home()),
-                        ),
-                      ),
-                      margin: new EdgeInsets.only(top: 40.0),
-                    )
+                    SizedBox(height: 40.0),
+                    namefield,
+                    SizedBox(height: 20.0),
+                    emailfield,
+                    SizedBox(height: 20.0),
+                    passwordfield,
+                    SizedBox(height: 20.0),
+                    confirmpasswordfield,
+                    SizedBox(height: 40.0),
+                    signupButton,
                   ],
                 ),
               ))

@@ -184,6 +184,23 @@ class Home extends StatelessWidget {
               margin: EdgeInsets.only(left: 00, top: 0, right: 0, bottom: 20),
               child: Center(child: Image.asset('assets/images/therapy.png')),
             ),
+            Container(
+                child: Column(
+              children: [
+                ActionChip(
+                  label: Text("Logout"),
+                  onPressed: () => {},
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.red)),
+                  padding: EdgeInsets.all(15),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ))
           ],
         ));
   }
