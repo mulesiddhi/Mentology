@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/model/user_model.dart';
 import './home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -7,6 +11,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final _auth = FirebaseAuth.instance;
+
   //form  key
   final _formKey = GlobalKey<FormState>();
   //editting controller
@@ -22,6 +28,17 @@ class _SignUpState extends State<SignUp> {
       controller: _nameController,
       keyboardType: TextInputType.name,
       autofocus: false,
+      validator: (value) {
+        RegExp regex = new RegExp(r'^.{3,}$');
+        if (value!.isEmpty) {
+          return 'Name cannot be empty';
+        }
+        //regex for email
+        if (!regex.hasMatch(value)) {
+          return ("Name must be at least 3 characters");
+        }
+        return null;
+      },
       style: TextStyle(
         color: Colors.black,
       ),
@@ -53,6 +70,16 @@ class _SignUpState extends State<SignUp> {
       onSaved: (String? value) {
         _emailController.text = value!;
       },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter email';
+        }
+        //regex for email
+        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+          return ("Please Enter a valid email");
+        }
+        return null;
+      },
       decoration: new InputDecoration(
           prefixIcon: Icon(Icons.email),
           hintText: 'you@example.com',
@@ -74,6 +101,15 @@ class _SignUpState extends State<SignUp> {
         onSaved: (String? value) {
           _passwordController.text = value!;
         },
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Password is required for SignUp");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password(Min. 6 Character)");
+          }
+        },
         textInputAction: TextInputAction.next,
         decoration: new InputDecoration(
             hintText: 'Password',
@@ -90,6 +126,14 @@ class _SignUpState extends State<SignUp> {
         obscureText: true,
         onSaved: (String? value) {
           _passwordController.text = value!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Password is required for SignUp");
+          }
+          if (value != _passwordController.text) {
+            return ("Password does not match");
+          }
         },
         textInputAction: TextInputAction.done,
         decoration: new InputDecoration(
@@ -108,7 +152,9 @@ class _SignUpState extends State<SignUp> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () => {},
+        onPressed: () => {
+          signUp(_emailController.text, _passwordController.text),
+        },
         child: Text(
           "SignUp",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -173,5 +219,58 @@ class _SignUpState extends State<SignUp> {
                 ),
               ))
         ]));
+  }
+
+  //signup function
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) => {
+                Fluttertoast.showToast(
+                    msg: e.toString(),
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.black,
+                    textColor: Colors.white,
+                    fontSize: 20.0)
+              });
+    }
+  }
+
+  postDetailsToFirestore() async {
+    //calling firestore
+    //calling user model
+    //sending the values to firestore
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    UserModel userModel = UserModel();
+
+    //setting the values
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.name = _nameController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+
+    Fluttertoast.showToast(
+        msg: "SignUp Successful",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 20.0);
+    //redirecting to home page
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+        (Route<dynamic> route) => false);
   }
 }

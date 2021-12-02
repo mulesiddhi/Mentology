@@ -91,12 +91,8 @@ class _LoginState extends State<Login> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () => {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Home()),
-          )
-        },
+        onPressed: () =>
+            {signIn(_emailController.text, _passwordController.text)},
         child: Text(
           "Login",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -187,10 +183,35 @@ class _LoginState extends State<Login> {
         ]));
   }
 
+//login function
   void signIn(String email, String password) async {
-    if (_formKey.currentState!.validate()) {}
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(
+                    msg: "Login Successful",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.TOP,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.black,
+                    textColor: Colors.white,
+                    fontSize: 26.0),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => Home()),
+                )
+              })
+          .catchError((e) => {
+                Fluttertoast.showToast(
+                    msg: e.toString(),
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.black,
+                    textColor: Colors.white,
+                    fontSize: 20.0),
+              });
+      ;
+    }
   }
 }
-
-//login function
-

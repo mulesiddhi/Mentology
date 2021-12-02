@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+
 import './home.dart';
 
 class Therapy extends StatefulWidget {
@@ -38,12 +39,7 @@ class _TherapyState extends State<Therapy> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => Home()));
-                                },
+                                onTap: () {},
                                 child: Text(
                                   newData[index]['title'],
                                   //'Note Title',
@@ -54,6 +50,11 @@ class _TherapyState extends State<Therapy> {
                               ),
                               Text(
                                 newData[index]['text'],
+                                //'Note Text',
+                                style: TextStyle(color: Colors.grey.shade600),
+                              ),
+                              Text(
+                                newData[index]['phone'],
                                 //'Note Text',
                                 style: TextStyle(color: Colors.grey.shade600),
                               ),

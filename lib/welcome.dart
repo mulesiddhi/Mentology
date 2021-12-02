@@ -12,7 +12,7 @@ class Welcome extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(50),
+            margin: EdgeInsets.only(top: 50),
             child: Center(
               child: Text(
                 "MENTOLOGY",
@@ -32,14 +32,10 @@ class Welcome extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(5),
-            child: Image.asset('assets/images/home.png'),
-          ),
-          Container(
               padding: EdgeInsets.all(10),
+              margin: EdgeInsets.only(bottom: 30),
               child: Center(
-                  child: Text("SMALL MOMENTS COUNT",
+                  child: Text("A place to feel better, wherever you go.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16.0,
@@ -47,11 +43,23 @@ class Welcome extends StatelessWidget {
                         color: Colors.black,
                       )))),
           Container(
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(5),
+            child: Image.asset('assets/images/home.png'),
+          ),
+          Container(
+              padding: EdgeInsets.all(10),
+              child: Center(
+                  child: Text(
+                "Mentology is a free mental health app whose tools and insight are meant to “shape up” your mood. Similar to the way you might decide to get into physical shape, this app is meant to help you get into mental shape.",
+                textAlign: TextAlign.center,
+              ))),
+          Container(
               padding: EdgeInsets.all(15),
               margin: EdgeInsets.all(15),
               child: Center(
                   child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "Improve your mental health in the most convenient and affordable way!",
                 textAlign: TextAlign.center,
               ))),
           Container(

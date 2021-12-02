@@ -1,8 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/welcome.dart';
 import './signup.dart';
 import './therapy.dart';
+import './login.dart';
+import 'model/user_model.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<Home> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users") //get the collection
+        .doc(user!.uid) //get the user id
+        .get() //getting all the values from the database
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(
+          value.data()); //converting the data into a user model
+      setState(() {}); //updating the state
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,8 +41,8 @@ class Home extends StatelessWidget {
             Container(
                 padding: EdgeInsets.all(10),
                 margin:
-                    EdgeInsets.only(left: 10, top: 40, right: 0, bottom: 00),
-                child: Text("Welcome,",
+                    EdgeInsets.only(left: 10, top: 10, right: 0, bottom: 00),
+                child: Text("Welcome ${loggedInUser.name},",
                     // textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.0,
@@ -189,8 +217,13 @@ class Home extends StatelessWidget {
               children: [
                 ActionChip(
                   label: Text("Logout"),
-                  onPressed: () => {},
-                  backgroundColor: Colors.red,
+                  onPressed: () => {
+                    logout(context),
+                  },
+                  backgroundColor: Colors.black,
+                  elevation: 10,
+                  labelStyle: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.red)),
@@ -203,5 +236,12 @@ class Home extends StatelessWidget {
             ))
           ],
         ));
+  }
+
+//LOGOUT FUNCTION
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => Welcome()));
   }
 }
