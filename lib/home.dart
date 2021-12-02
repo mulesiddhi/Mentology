@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/survey.dart';
 import 'package:flutter_basic/welcome.dart';
 import './signup.dart';
 import './therapy.dart';
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<Home> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Therapy()),
+                            MaterialPageRoute(builder: (context) => Survey()),
                           );
                         },
                         child: Text('    Continue    '),
@@ -176,7 +177,8 @@ class _HomeScreenState extends State<Home> {
                   Container(
                       padding: EdgeInsets.all(5),
                       child: Center(
-                          child: Text("Match with your Wellness Specialist",
+                          child: Text(
+                              "See our Top Recommended Wellness Specialist",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 20.0,
