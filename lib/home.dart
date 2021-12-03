@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/exercises.dart';
 import 'package:flutter_basic/survey.dart';
 import 'package:flutter_basic/welcome.dart';
 import './signup.dart';
@@ -155,7 +156,7 @@ class _HomeScreenState extends State<Home> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Therapy()),
+                            MaterialPageRoute(builder: (context) => Exercise()),
                           );
                         },
                         child: Text("     Let's Go     "),
